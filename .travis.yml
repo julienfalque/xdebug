@@ -4,8 +4,10 @@ sudo: false
 
 before_install:
     - sudo apt-get -qq update
-    - sudo apt-get install -y realpath
+    - sudo apt-get install -y realpath shellcheck
     - phpenv config-rm xdebug.ini
 
 script:
     - tests/tests.sh
+    - shellcheck xdebug
+    - shellcheck tests/tests.sh
