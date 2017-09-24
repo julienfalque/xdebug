@@ -1,0 +1,11 @@
+language: php
+
+sudo: false
+
+before_install:
+    - sudo apt-get -qq update
+    - sudo apt-get install -y realpath
+    - phpenv config-rm xdebug.ini
+
+script:
+    - tests/tests.sh
