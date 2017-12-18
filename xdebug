@@ -15,7 +15,7 @@ ${title}Help:${default}
 
  Run a local executable PHP script:
 
-   ${info}xdebug app/console symfony:command${default}
+   ${info}xdebug bin/console symfony:command${default}
 
  Run the PHP command:
 
