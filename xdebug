@@ -31,7 +31,7 @@ USAGE
 fi
 
 run_with_xdebug() {
-    XDEBUG_CONFIG="idekey=xdebug" \
+    XDEBUG_CONFIG=1 \
     php \
         -dzend_extension=xdebug.so \
         -dxdebug.remote_enable=on \
