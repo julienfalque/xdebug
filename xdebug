@@ -44,13 +44,13 @@ then
 
 elif [ "php" != "$1" ]
 then
-    if ! which "$1" > /dev/null 2>&1
+    if ! command -v "$1" > /dev/null 2>&1
     then
         echo "Not a PHP file or a command: $1"
         exit 4
     fi
 
-    run_with_xdebug "$(which "$1")" "${@:2}"
+    run_with_xdebug "$(command -v "$1")" "${@:2}"
 
 else
     run_with_xdebug "${@:2}"
