@@ -1,18 +1,33 @@
-language: php
-
 sudo: false
 
-php:
-    - 7.2
-    - 7.3
-    - 7.4
+jobs:
+    include:
+        - &php-job
+            name: PHP 7.2
+            language: php
+            php: 7.2
+            before_install:
+                - sudo apt update
+                - sudo apt install --assume-yes realpath shellcheck
+                - phpenv config-rm xdebug.ini
+            script:
+                - tests/tests.sh
+                - shellcheck xdebug
+                - shellcheck tests/tests.sh
+        -
+            <<: *php-job
+            name: PHP 7.3
+            php: 7.3
+        -
+            <<: *php-job
+            name: PHP 7.4
+            php: 7.4
+        -
+            name: Without PHP
+            language: sh
+            before_install:
+                - PATH=$(echo $PATH | sed 's/:\/home\/travis\/.phpenv\/shims//')
+                - if command -v php > /dev/null; then exit 1; fi
+            script:
+                - tests/tests.sh
 
-before_install:
-    - sudo apt-get -qq update
-    - sudo apt-get install -y realpath shellcheck
-    - phpenv config-rm xdebug.ini
-
-script:
-    - tests/tests.sh
-    - shellcheck xdebug
-    - shellcheck tests/tests.sh

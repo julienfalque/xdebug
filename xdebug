@@ -31,6 +31,12 @@ USAGE
 fi
 
 run_with_xdebug() {
+    if ! command -v php > /dev/null
+    then
+        echo "Command php not found"
+        exit 4
+    fi
+
     XDEBUG_CONFIG=1 \
     php \
         -dzend_extension=xdebug.so \
