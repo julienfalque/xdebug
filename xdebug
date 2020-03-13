@@ -1,10 +1,10 @@
-#!/bin/bash
+#!/bin/sh
 
-if [ $# -eq 0 ] || [ "--help" == "$1" ] || [ "-h" == "$1" ]
+if [ $# -eq 0 ] || [ "--help" = "$1" ] || [ "-h" = "$1" ]
 then
-    default=$(echo -e "\\e[0m")
-    title=$(echo -e "\\e[33m")
-    info=$(echo -e "\\e[32m")
+    default=$(printf "\033[0m")
+    title=$(printf "\033[33m")
+    info=$(printf "\033[32m")
 
     cat <<USAGE
 ${title}Usage:${default}
@@ -41,18 +41,21 @@ run_with_xdebug() {
 if [ -f "$1" ]
 then
     run_with_xdebug "$@"
+    exit 0
+fi
 
-elif [ "php" != "$1" ]
+command="$1"
+shift
+
+if [ "php" != "$command" ]
 then
-    if ! command -v "$1" > /dev/null 2>&1
+    if ! command -v "$command" > /dev/null 2>&1
     then
-        echo "Not a PHP file or a command: $1"
+        echo "Not a PHP file or a command: $command"
         exit 4
     fi
 
-    run_with_xdebug "$(command -v "$1")" "${@:2}"
-
+    run_with_xdebug "$(command -v "$command")" "$@"
 else
-    run_with_xdebug "${@:2}"
+    run_with_xdebug "$@"
 fi
-
