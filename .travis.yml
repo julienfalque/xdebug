@@ -5,18 +5,26 @@ sudo: false
 
 jobs:
     include:
+        -
+            name: ShellCheck
+            stage: ShellCheck
+            language: sh
+            before_install:
+                - sudo apt update
+                - sudo apt install --assume-yes shellcheck
+            script:
+                - shellcheck xdebug
+                - shellcheck tests/tests.sh
+
         - &php-job
             name: PHP 7.2
+            stage: Tests
             language: php
             php: 7.2
             before_install:
-                - sudo apt update
-                - sudo apt install --assume-yes realpath shellcheck
                 - phpenv config-rm xdebug.ini
             script:
                 - tests/tests.sh
-                - shellcheck xdebug
-                - shellcheck tests/tests.sh
         -
             <<: *php-job
             name: PHP 7.3
@@ -27,6 +35,7 @@ jobs:
             php: 7.4
         -
             name: Without PHP
+            stage: Tests
             language: sh
             before_install:
                 - PATH=$(echo $PATH | sed 's/:\/home\/travis\/.phpenv\/shims//')
