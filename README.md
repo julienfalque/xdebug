@@ -1,7 +1,7 @@
 Xdebug
 ======
 
-This little bash script allows you to enable Xdebug on demand when running a PHP script.
+This little shell script allows you to enable Xdebug on demand when running a PHP script.
 
 Xdebug is a powerful tool to debug PHP scripts, but is also known to be a performance killer: enabling it by default for CLI scripts will slow down all PHP commands such as Composer or PHPUnit. It is then recommended to not load the Xdebug extension at all for CLI. If you need to debug a script, enable the extension just for this script.
 
