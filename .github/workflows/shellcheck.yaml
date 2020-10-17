@@ -1,0 +1,25 @@
+name: ShellCheck
+
+on:
+  push:
+    paths:
+      - xdebug
+      - '**.sh'
+  pull_request:
+    paths:
+      - xdebug
+      - '**.sh'
+
+jobs:
+  shellcheck:
+    name: ShellCheck
+    runs-on: ubuntu-latest
+    steps:
+      - name: Install ShellCheck
+        run: sudo apt update && sudo apt install --assume-yes shellcheck
+
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - run: shellcheck xdebug
+      - run: shellcheck tests/tests.sh

@@ -1,0 +1,46 @@
+name: Tests
+
+on:
+  push:
+    paths:
+      - xdebug
+      - tests/**
+  pull_request:
+    paths:
+      - xdebug
+      - tests/**
+
+jobs:
+  php:
+    name: PHP ${{ matrix.php-version }}
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        php-version: [ '7.2', '7.3', '7.4', '8.0' ]
+    steps:
+      - name: Install PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: ${{ matrix.php-version }}
+
+      - name: Disable Xdebug
+        run: sudo phpdismod -v ${{ matrix.php-version }} xdebug
+
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Run tests
+        run: tests/tests.sh
+
+  without-php:
+    name: Without PHP
+    runs-on: ubuntu-latest
+    steps:
+      - name: Disable PHP
+        run: sudo rm $(command -v php)
+
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Run tests
+        run: tests/tests.sh
