@@ -7,6 +7,11 @@ Xdebug is a powerful tool to debug PHP scripts, but is also known to be a perfor
 
 _Note: the script was tested with PhpStorm only._
 
+Compatibility
+------------
+
+The script currently supports PHP 5.6+ and Xdebug 2+.
+
 Installation
 ------------
 

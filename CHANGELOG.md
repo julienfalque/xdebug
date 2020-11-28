@@ -4,9 +4,11 @@ All notable changes to this project will be documented in this file. The format 
 
 This project adheres to [Semantic Versioning](https://semver.org).
 
-## [Unreleased](https://github.com/julienfalque/xdebug/compare/v1.1.0...HEAD)
+## [v2.0.0](https://github.com/julienfalque/xdebug/compare/v1.1.0...v2.0.0) - 2020-11-29
 
-*N/A*
+### Changed
+
+- The option `xdebug.remote_enable=on` is not passed anymore for Xdebug 3 compatibility
 
 ## [v1.1.0](https://github.com/julienfalque/xdebug/compare/v1.0.0...v1.1.0) - 2020-03-13
 

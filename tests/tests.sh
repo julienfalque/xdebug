@@ -54,7 +54,6 @@ if ! run_test \
     "No Xdebug" \
     "$(cat <<STR
 Xdebug extension loaded: no
-INI setting "xdebug.remote_enable": ""
 CLI arguments: array (
   0 => '${php_file_path}',
 )
@@ -72,7 +71,6 @@ if ! run_test \
     "No Xdebug, with arguments" \
     "$(cat <<STR
 Xdebug extension loaded: no
-INI setting "xdebug.remote_enable": ""
 CLI arguments: array (
   0 => '${php_file_path}',
   1 => '-a',
@@ -93,7 +91,6 @@ fi
 
 expected_result_xdebug="$(cat <<STR
 Xdebug extension loaded: yes
-INI setting "xdebug.remote_enable": "1"
 CLI arguments: array (
   0 => '${php_file_path}',
 )
@@ -112,7 +109,6 @@ fi
 
 expected_result_xdebug_with_arguments="$(cat <<STR
 Xdebug extension loaded: yes
-INI setting "xdebug.remote_enable": "1"
 CLI arguments: array (
   0 => '${php_file_path}',
   1 => '-a',

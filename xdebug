@@ -37,11 +37,7 @@ run_with_xdebug() {
         exit 4
     fi
 
-    XDEBUG_CONFIG=1 \
-    php \
-        -dzend_extension=xdebug.so \
-        -dxdebug.remote_enable=on \
-        "$@"
+    XDEBUG_CONFIG=1 php -dzend_extension=xdebug.so "$@"
 }
 
 if [ -f "$1" ]
