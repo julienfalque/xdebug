@@ -23,9 +23,23 @@ jobs:
         uses: shivammathur/setup-php@v2
         with:
           php-version: ${{ matrix.php-version }}
+          extensions: xdebug
 
-      - name: Disable Xdebug
+      - name: Disable Xdebug (PHP <8.0)
+        if: matrix.php-version != '8.0'
         run: sudo phpdismod -v ${{ matrix.php-version }} xdebug
+
+      - name: Disable Xdebug (PHP 8.0)
+        if: matrix.php-version == '8.0'
+        run: |
+          php -m
+          scan_dir=$(php --ini | grep additional | sed -e "s|.*: s*||")
+          ini_file=$(php --ini | grep "Loaded Configuration" | sed -e "s|.*:s*||" | sed "s/ //g")
+          pecl_file="$scan_dir"/99-pecl.ini
+          sudo sed -Ei "/xdebug/d" "${ini_file:?}"
+          sudo sed -Ei "/xdebug/d" "${pecl_file:?}"
+          sudo rm -rf "$scan_dir"/xdebug*
+          php -m
 
       - name: Checkout code
         uses: actions/checkout@v2
