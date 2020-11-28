@@ -10,7 +10,7 @@ _Note: the script was tested with PhpStorm only._
 Compatibility
 ------------
 
-The script currently supports PHP 5.6+ and Xdebug 2+.
+The script currently supports PHP 7.2+ and Xdebug 2+.
 
 Installation
 ------------

@@ -9,6 +9,7 @@ This project adheres to [Semantic Versioning](https://semver.org).
 ### Changed
 
 - The option `xdebug.remote_enable=on` is not passed anymore for Xdebug 3 compatibility
+- The extension name to load is now `xdebug` instead of `xdebug.so`
 
 ## [v1.1.0](https://github.com/julienfalque/xdebug/compare/v1.0.0...v1.1.0) - 2020-03-13
 
